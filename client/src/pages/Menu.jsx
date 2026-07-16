@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import menuData from '../data/menuData'
+import { useCart } from '../context/CartContext'
 
 const Menu = () => {
+  const { addToCart } = useCart()
   const [selectedCategory, setSelectedCategory] = useState('All')
 
   const categories = [
@@ -85,7 +87,11 @@ const Menu = () => {
                     ₹{item.price}
                   </span>
 
-                  <button className="rounded-full bg-amber-400 px-5 py-2.5 font-semibold text-slate-950 transition hover:bg-amber-300">
+
+                  <button 
+                    onClick={() => addToCart(item)}
+
+                  className="rounded-full bg-amber-400 px-5 py-2.5 font-semibold text-slate-950 transition hover:bg-amber-300">
                     Add to Cart
                   </button>
                 </div>

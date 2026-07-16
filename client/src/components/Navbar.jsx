@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom'
+import { useCart } from '../context/CartContext'
 
 const Navbar = () => {
+  const { cartCount } = useCart()
+
   return (
     <header className="absolute top-0 left-0 z-50 w-full">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-8">
@@ -49,9 +52,18 @@ const Navbar = () => {
           </a>
         </div>
 
-        <button className="rounded-full bg-amber-400 px-5 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-amber-300">
-          Book Now
-        </button>
+        <div className="flex items-center gap-5">
+          <Link
+            to="/cart"
+            className="text-sm font-semibold text-white transition hover:text-amber-400"
+          >
+            Cart ({cartCount})
+          </Link>
+
+          <button className="rounded-full bg-amber-400 px-5 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-amber-300">
+            Book Now
+          </button>
+        </div>
 
       </nav>
     </header>
