@@ -1,6 +1,12 @@
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Services from './components/Services'
+import FeaturedMenu from './components/FeaturedMenu'
+import RoomsSection from './components/RoomsSection'
+import BanquetSection from './components/BanquetSection'
+import ContactSection from './components/ContactSection'
+import Footer from './components/Footer'
+
 
 
 // function App() {
@@ -26,6 +32,11 @@ function App() {
       <Navbar />
       <Hero />
       <Services/>
+      <FeaturedMenu/>
+      <RoomsSection/>
+      <BanquetSection/>
+      <ContactSection/>
+      <Footer/>
     </div>
   )
 }
