@@ -1,4 +1,5 @@
 import banquetImage from '../assets/banquet-hall.png.png'
+import { Link } from 'react-router-dom'
 
 const BanquetSection = () => {
   return (
@@ -48,9 +49,12 @@ const BanquetSection = () => {
                 </div>
               </div>
 
-              <button className="mt-8 rounded-full bg-amber-400 px-7 py-3.5 font-semibold text-slate-950 transition hover:bg-amber-300">
+              <Link
+                to="/banquet"
+                className="mt-8 inline-block rounded-full bg-amber-400 px-7 py-3.5 font-semibold text-slate-950 transition hover:bg-amber-300"
+              >
                 Check Hall Availability
-              </button>
+              </Link>
             </div>
           </div>
 

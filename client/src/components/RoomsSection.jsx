@@ -1,4 +1,5 @@
 import roomData from '../data/roomData'
+import { Link } from 'react-router-dom'
 
 const RoomsSection = () => {
   return (
@@ -65,9 +66,12 @@ const RoomsSection = () => {
                   ))}
                 </div>
 
-                <button className="mt-8 rounded-full bg-slate-950 px-6 py-3 font-semibold text-white transition hover:bg-amber-500 hover:text-slate-950">
+                <Link
+                  to="/rooms"
+                  className="mt-8 inline-block rounded-full bg-slate-950 px-6 py-3 font-semibold text-white transition hover:bg-amber-500 hover:text-slate-950"
+                >
                   Check Availability
-                </button>
+                </Link>
               </div>
             </article>
           ))}
