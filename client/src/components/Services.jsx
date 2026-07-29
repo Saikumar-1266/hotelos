@@ -1,37 +1,39 @@
+import { Link } from "react-router-dom";
+
+
 const services = [
   {
-    number: '01',
-    title: 'Tea & Tiffins',
-    description:
-      'Start your day with fresh tea, coffee, and a delicious selection of traditional breakfast favourites.',
-    action: 'Explore Tiffins',
+    number: "01",
+    title: "Tea & Tiffins",
+    description: "...",
+    action: "Explore Tiffins",
+    link: "/menu?category=tiffins",
   },
   {
-    number: '02',
-    title: 'Restaurant',
-    description:
-      'Enjoy flavourful biryanis, curries, naans, starters, and family dining prepared with care.',
-    action: 'View Menu',
+    number: "02",
+    title: "Restaurant",
+    description: "...",
+    action: "View Menu",
+    link: "/menu",
   },
   {
-    number: '03',
-    title: 'Rooms',
-    description:
-      'Relax in clean and comfortable rooms designed for a convenient and peaceful 24-hour stay.',
-    action: 'View Rooms',
+    number: "03",
+    title: "Rooms",
+    description: "...",
+    action: "View Rooms",
+    link: "/rooms",
   },
   {
-    number: '04',
-    title: 'Banquet Hall',
-    description:
-      'Celebrate weddings, birthdays, and special occasions in a spacious venue for up to 200 guests.',
-    action: 'Explore Banquet',
+    number: "04",
+    title: "Banquet Hall",
+    description: "...",
+    action: "Explore Banquet",
+    link: "/banquet",
   },
-]
-
+];
 const Services = () => {
   return (
-    <section className="bg-stone-50 py-24">
+    <section className="bg-stone-50 py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
 
         <div className="max-w-2xl">
@@ -49,10 +51,11 @@ const Services = () => {
           </p>
         </div>
 
-        <div className="mt-16 grid gap-px overflow-hidden rounded-3xl bg-slate-200 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-px overflow-hidden rounded-3xl bg-slate-200 md:mt-16 md:grid-cols-2 lg:grid-cols-4">
           {services.map((service) => (
-            <article
+            <Link
               key={service.number}
+              to={service.link}
               className="group flex min-h-80 flex-col bg-white p-8 transition hover:bg-slate-950"
             >
               <span className="text-sm font-semibold text-amber-600">
@@ -67,10 +70,10 @@ const Services = () => {
                 {service.description}
               </p>
 
-              <button className="mt-8 text-left text-sm font-semibold text-amber-600">
+              <span className="mt-8 inline-block text-sm font-semibold text-amber-600">
                 {service.action} →
-              </button>
-            </article>
+              </span>
+            </Link>
           ))}
         </div>
 

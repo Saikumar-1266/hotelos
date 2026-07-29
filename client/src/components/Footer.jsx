@@ -1,9 +1,9 @@
 const Footer = () => {
   return (
     <footer className="bg-slate-950">
-      <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+      <div className="mx-auto max-w-7xl px-6 py-10 md:py-12 lg:px-8">
 
-        <div className="flex flex-col justify-between gap-8 md:flex-row md:items-center">
+        <div className="flex flex-col items-center gap-8 text-center md:flex-row md:items-center md:justify-between md:text-left">
           <div>
             <h2 className="text-2xl font-bold text-white">
               Hotel<span className="text-amber-400">OS</span>

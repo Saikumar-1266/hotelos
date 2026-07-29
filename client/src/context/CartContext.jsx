@@ -14,12 +14,21 @@ export const CartProvider = ({ children }) => {
       if (existingItem) {
         return currentItems.map((cartItem) =>
           cartItem.id === item.id
-            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            ? {
+                ...cartItem,
+                quantity: cartItem.quantity + 1,
+              }
             : cartItem
         )
       }
 
-      return [...currentItems, { ...item, quantity: 1 }]
+      return [
+        ...currentItems,
+        {
+          ...item,
+          quantity: 1,
+        },
+      ]
     })
   }
 
@@ -27,7 +36,10 @@ export const CartProvider = ({ children }) => {
     setCartItems((currentItems) =>
       currentItems.map((item) =>
         item.id === id
-          ? { ...item, quantity: item.quantity + 1 }
+          ? {
+              ...item,
+              quantity: item.quantity + 1,
+            }
           : item
       )
     )
@@ -38,7 +50,10 @@ export const CartProvider = ({ children }) => {
       currentItems
         .map((item) =>
           item.id === id
-            ? { ...item, quantity: item.quantity - 1 }
+            ? {
+                ...item,
+                quantity: item.quantity - 1,
+              }
             : item
         )
         .filter((item) => item.quantity > 0)
@@ -51,13 +66,18 @@ export const CartProvider = ({ children }) => {
     )
   }
 
+  const clearCart = () => {
+    setCartItems([])
+  }
+
   const cartCount = cartItems.reduce(
     (total, item) => total + item.quantity,
     0
   )
 
   const cartTotal = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
+    (total, item) =>
+      total + item.price * item.quantity,
     0
   )
 
@@ -69,6 +89,7 @@ export const CartProvider = ({ children }) => {
         increaseQuantity,
         decreaseQuantity,
         removeFromCart,
+        clearCart,
         cartCount,
         cartTotal,
       }}

@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom'
 
 const BanquetSection = () => {
   return (
-    <section id="banquet" className="bg-white py-24">
+    <section id="banquet" className="bg-white py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
 
         <div className="grid overflow-hidden rounded-3xl bg-slate-950 lg:grid-cols-2">
           
-          <div className="min-h-96">
+          <div className="h-64 sm:h-80 lg:min-h-96">
             <img
               src={banquetImage}
               alt="Banquet hall"
@@ -16,7 +16,7 @@ const BanquetSection = () => {
             />
           </div>
 
-          <div className="flex items-center p-10 md:p-14">
+          <div className="flex items-center p-6 sm:p-8 md:p-14">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.3em] text-amber-400">
                 Celebrate With Us
@@ -31,7 +31,7 @@ const BanquetSection = () => {
                 events, and special occasions in our spacious banquet hall.
               </p>
 
-              <div className="mt-8 grid grid-cols-2 gap-6 border-y border-white/10 py-6">
+              <div className="mt-8 grid grid-cols-1 gap-6 border-y border-white/10 py-6 sm:grid-cols-2">
                 <div>
                   <p className="text-3xl font-bold text-amber-400">200</p>
                   <p className="mt-1 text-sm text-slate-400">

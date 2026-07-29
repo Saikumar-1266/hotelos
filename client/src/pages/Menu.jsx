@@ -19,12 +19,12 @@ const Menu = () => {
   return (
     <main className="min-h-screen bg-stone-50">
       {/* Page Header */}
-      <section className="bg-slate-950 px-6 pb-20 pt-36 text-center">
+      <section className="bg-slate-950 px-6 pb-16 pt-28 md:pb-20 md:pt-36 text-center">
         <p className="text-sm font-semibold uppercase tracking-[0.3em] text-amber-400">
           Our Restaurant
         </p>
 
-        <h1 className="mt-4 text-5xl font-bold text-white md:text-6xl">
+        <h1 className="mt-4 text-4xl font-bold text-white sm:text-5xl md:text-6xl">
           Discover Our Menu
         </h1>
 
@@ -55,7 +55,7 @@ const Menu = () => {
         </div>
 
         {/* Food Cards */}
-        <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-6 md:mt-14 sm:grid-cols-2 lg:grid-cols-3">
           {filteredItems.map((item) => (
             <article
               key={item.id}
@@ -82,7 +82,7 @@ const Menu = () => {
                   {item.description}
                 </p>
 
-                <div className="mt-6 flex items-center justify-between">
+                <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                   <span className="text-2xl font-bold text-slate-950">
                     ₹{item.price}
                   </span>
@@ -91,7 +91,7 @@ const Menu = () => {
                   <button 
                     onClick={() => addToCart(item)}
 
-                  className="rounded-full bg-amber-400 px-5 py-2.5 font-semibold text-slate-950 transition hover:bg-amber-300">
+                  className="w-full rounded-full bg-amber-400 px-5 py-2.5 font-semibold text-slate-950 transition hover:bg-amber-300 sm:w-auto">
                     Add to Cart
                   </button>
                 </div>

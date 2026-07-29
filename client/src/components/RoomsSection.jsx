@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 
 const RoomsSection = () => {
   return (
-    <section id="rooms" className="bg-stone-50 py-24">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+<section id="rooms" className="bg-stone-50 py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
 
         <div className="max-w-2xl">
           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-amber-600">
@@ -21,13 +21,13 @@ const RoomsSection = () => {
           </p>
         </div>
 
-        <div className="mt-14 grid gap-8 lg:grid-cols-2">
+        <div className="mt-10 grid gap-8 md:mt-14 lg:grid-cols-2">
           {roomData.map((room) => (
             <article
               key={room.id}
               className="overflow-hidden rounded-3xl bg-white shadow-sm"
             >
-              <div className="h-80 overflow-hidden">
+              <div className="h-64 overflow-hidden sm:h-80">
                 <img
                   src={room.image}
                   alt={room.name}
