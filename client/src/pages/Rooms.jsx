@@ -21,41 +21,56 @@ const Rooms = () => {
   const [checkingAvailability, setCheckingAvailability] = useState(false)
   const [availabilityMessage, setAvailabilityMessage] = useState('')
 
+  // Helper function to check room availability with graceful fallback
+  const verifyRoomAvailability = async () => {
+    try {
+      const { data, error } = await supabase.rpc('is_room_available', {
+        p_room_type: selectedRoom.name,
+        p_check_in_date: formData.checkInDate,
+        p_check_in_time: formData.checkInTime,
+      })
+
+      if (!error && typeof data === 'boolean') {
+        return { available: data, error: null }
+      }
+    } catch (rpcErr) {
+      console.warn('RPC check unavailable, falling back to direct table query:', rpcErr)
+    }
+
+    // Direct table query fallback if RPC is not available or errors
+    const { data: existingBookings, error: fallbackError } = await supabase
+      .from('room_bookings')
+      .select('id')
+      .eq('room_type', selectedRoom.name)
+      .eq('check_in_date', formData.checkInDate)
+      .in('status', ['pending', 'confirmed'])
+
+    if (fallbackError) {
+      return { available: false, error: fallbackError }
+    }
+
+    return { available: (existingBookings || []).length === 0, error: null }
+  }
+
   // Check Availability
   const checkAvailability = async () => {
     if (!formData.checkInDate || !formData.checkInTime) {
-      setAvailabilityMessage(
-        'Please select check-in date and time.'
-      )
+      setAvailabilityMessage('Please select check-in date and time.')
       return
     }
 
     setCheckingAvailability(true)
     setAvailabilityMessage('')
 
-    const { data, error } = await supabase.rpc(
-      'is_room_available',
-      {
-        p_room_type: selectedRoom.name,
-        p_check_in_date: formData.checkInDate,
-        p_check_in_time: formData.checkInTime,
-      }
-    )
+    const { available, error } = await verifyRoomAvailability()
 
     if (error) {
       console.error('Availability check error:', error)
-
-      setAvailabilityMessage(
-        'Could not check availability. Please try again.'
-      )
-    } else if (data) {
-      setAvailabilityMessage(
-        '✅ Room is available for this date and time.'
-      )
+      setAvailabilityMessage('Could not check availability. Please try again.')
+    } else if (available) {
+      setAvailabilityMessage('✅ Room is available for this date and time.')
     } else {
-      setAvailabilityMessage(
-        '❌ Room is not available for the selected date and time.'
-      )
+      setAvailabilityMessage('❌ Room is not available for the selected date and time.')
     }
 
     setCheckingAvailability(false)
@@ -69,34 +84,17 @@ const Rooms = () => {
     setMessage('')
 
     // Check availability again before saving
-    const {
-      data: isAvailable,
-      error: availabilityError,
-    } = await supabase.rpc('is_room_available', {
-      p_room_type: selectedRoom.name,
-      p_check_in_date: formData.checkInDate,
-      p_check_in_time: formData.checkInTime,
-    })
+    const { available, error: availabilityError } = await verifyRoomAvailability()
 
     if (availabilityError) {
-      console.error(
-        'Availability check error:',
-        availabilityError
-      )
-
-      setMessage(
-        'Could not check room availability. Please try again.'
-      )
-
+      console.error('Availability check error:', availabilityError)
+      setMessage('Could not check room availability. Please try again.')
       setLoading(false)
       return
     }
 
-    if (!isAvailable) {
-      setMessage(
-        'Sorry, this room is not available for the selected date and time.'
-      )
-
+    if (!available) {
+      setMessage('Sorry, this room is not available for the selected date and time.')
       setLoading(false)
       return
     }
